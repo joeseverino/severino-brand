@@ -1,0 +1,39 @@
+{
+  "name": "Joe Severino",
+  "font": "fonts/inter/inter-variable-latin.woff2",
+  "weight": 800,
+  "wordmarkWeight": 700,
+  "identity": {
+    "slug": "joe-severino",
+    "color": "#1E3A8A",
+    "deep": "#14245C",
+    "onColor": "#ffffff",
+    "glyph": "JS",
+    "wordmark": "Joe Severino"
+  },
+  "cardPalette": {
+    "accent": "#5B82D6",
+    "textSoft": "#DDE6FB",
+    "textMuted": "#A9C0E8"
+  },
+  "cards": [
+    {
+      "file": "og-default.png",
+      "width": 1200, "height": 630, "photoWidth": 462,
+      "eyebrow": "Cybersecurity • Networking",
+      "name": "Joe Severino",
+      "tagline": "Hands-on security & infrastructure projects",
+      "meta": "CCNA • Security+ • ISC2 CC",
+      "url": "jseverino.com"
+    },
+    {
+      "file": "github-social-preview.png",
+      "width": 1280, "height": 640, "photoWidth": 480,
+      "eyebrow": "GitHub • Open Source",
+      "name": "jseverino.com",
+      "tagline": "Source for my personal site",
+      "meta": "Astro • TypeScript • Cloudflare Pages",
+      "url": "github.com/joeseverino/jseverino.com"
+    }
+  ]
+}

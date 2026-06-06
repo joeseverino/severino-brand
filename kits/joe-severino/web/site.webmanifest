@@ -1,0 +1,19 @@
+{
+  "name": "Joe Severino",
+  "short_name": "JS",
+  "icons": [
+    {
+      "src": "/icons/favicon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/icons/apple-touch-icon.png",
+      "sizes": "180x180",
+      "type": "image/png"
+    }
+  ],
+  "theme_color": "#1E3A8A",
+  "background_color": "#ffffff",
+  "display": "standalone"
+}
