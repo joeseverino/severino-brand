@@ -9,6 +9,6 @@
     "kit": "branding-engine kit"
   },
   "dependencies": {
-    "branding-engine": "file:../../Projects/branding-engine"
+    "branding-engine": "^0.2.1"
   }
 }

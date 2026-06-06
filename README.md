@@ -1,7 +1,8 @@
 # severino-brand
 
 Joe Severino's brand, defined as data and rendered by
-[branding-engine](../../Projects/branding-engine).
+[branding-engine](https://github.com/joeseverino/branding-engine)
+([npm](https://www.npmjs.com/package/branding-engine)).
 
 The brand was shaped and proven on [jseverino.com](https://jseverino.com), so the
 site is its flagship example. This repo is where the brand is *defined*; the
@@ -21,8 +22,8 @@ kits/       GENERATED: delete it, run `npm run build`, get it back identical
   cards/         brand-wide social cards
 ```
 
-The generators live in their own repo (`branding-engine`) and come in as a
-dependency. Nothing Severino-specific lives in the engine.
+The generators live in their own public repo (`branding-engine`) and come in as
+an npm dependency (`^0.2.1`). Nothing Severino-specific lives in the engine.
 
 ## The brand model
 
