@@ -115,25 +115,29 @@ These are the themeable UI tokens. A future dark mode flips these and only these
 | `--color-border` | `color-mix(in oklch, text 8%)` | hairlines, derived from text |
 | `--color-success` / `--color-error` | `#166534` / `#991b1b` | form + status |
 
-### Terminal signature (literal, stays dark)
+### Terminal signature (tokenized, stays dark)
 
-The code-block and terminal palette is a deliberate constant, not a token: it
-stays dark across any future theme because it represents a real terminal, not a
-themeable surface.
+The code-block and terminal palette is a tokenized group (`--code-*`, `--term-*`)
+that stays dark regardless of theme: it represents a real terminal, not a
+themeable surface. The site is light-only, so these never recolor — but they are
+still named so the whole palette reads in one place and changes in one edit.
 
-| Where | Hex |
-|---|---|
-| Terminal / code backgrounds | `#020617`, `#0b1220`, `#111827` |
-| Prompt | `#38bdf8` |
-| Command text | `#f8fafc` |
-| Output | `#4ade80` |
-| Window dots | `#ef4444`, `#f59e0b`, `#22c55e` |
+| Token | Hex | Where |
+|---|---|---|
+| `--code-bg` / `--code-fg` | `#020617` / `#d1d5db` | standalone code blocks |
+| `--term-bg` / `--term-fg` | `#0b1220` / `#e2e8f0` | terminal block surface + text |
+| `--term-bar-bg` / `--term-bar-fg` | `#111827` / `#94a3b8` | terminal title bar |
+| `--term-border` | `rgb(148 163 184 / 12%)` | terminal hairlines |
+| `--term-prompt` / `--term-cmd` / `--term-out` | `#38bdf8` / `#f8fafc` / `#4ade80` | prompt, command, output |
+| `--term-dot-red` / `-amber` / `-green` | `#ef4444` / `#f59e0b` / `#22c55e` | window dots |
 
 ### Token rule
 
-A color earns a named token only if it *repeats* or represents a *role that
-themes*. Single-use, component-local, decorative colors stay literal. This is why
-the terminal palette is hardcoded and the navy is a token.
+Every color is a named token. There is no literal-vs-token judgment call: the
+palette lives in one place, so any change is one edit and the system has no
+exceptions to remember. Tokens that represent a *themeable role* (navy-derived
+fills, hairlines) recolor with the accent; the terminal group is named for
+single-source clarity but stays dark.
 
 ---
 
