@@ -20,9 +20,9 @@ brand/      THE BRAND: the single source of truth
                  Obsidian theme) — consumers own their targets, not a copy of the logic
   fonts/  portrait.jpg
 kits/       GENERATED: delete it, run `npm run build`, get it back identical
-  joe-severino/  the brand's own kit
-  hq/            a surface
-  cards/         brand-wide social cards
+  joe-severino/  the brand's own kit  (tracked)
+  cards/         brand-wide social cards  (tracked)
+  …              one-off / surface kits are private — git-ignored by default
 bin/brand          CORDON EMITTER (Node): derives build/kit from package.json
 contract/brand.json  GENERATED: the cordon-v4 command-surface contract
 ```
