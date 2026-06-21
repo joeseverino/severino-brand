@@ -20,7 +20,32 @@ kits/       GENERATED: delete it, run `npm run build`, get it back identical
   joe-severino/  the brand's own kit
   hq/            a surface
   cards/         brand-wide social cards
+bin/brand          CORDON EMITTER (Node): derives build/kit from package.json
+contract/brand.json  GENERATED: the cordon-v4 command-surface contract
 ```
+
+## Cordon contract
+
+This repo emits its `build`/`kit` command surface as a
+[Cordon](https://github.com/joeseverino/cordon) v4 contract — the fleet's first
+**Node** emitter. Emit once: `bin/brand` *derives* the surface from this repo's
+`package.json` scripts via cordon's reusable [`emitters/node`](https://github.com/joeseverino/cordon/tree/main/emitters/node)
+(referenced, never vendored). Each command's `delegates` is the literal
+`branding-engine` command its script runs, and the only thing declared by hand is
+each command's `local_write` blast radius — nothing about the surface is typed
+twice. It follows cordon's tool convention — an executable `bin/<tool>` answering
+`--describe` — so the reusable `cordon / gate` covers it unchanged (`conformance`
+validates the contract; `drift` diffs it). `tools/bin/brand` is the launcher and
+*derives* build/kit from this contract rather than redeclaring them.
+
+```sh
+bin/brand --describe      # print the contract
+npm run describe:write    # regenerate contract/brand.json after a scripts change
+bin/brand --check         # fail if the committed contract is stale
+```
+
+`bin/brand` only **emits** — it is not a launcher. Build with `npm run build` /
+`npm run kit` (or `brand build` via the tools CLI).
 
 The generators live in their own public repo (`branding-engine`) and come in as
 an npm dependency (`^0.2.1`). Nothing Severino-specific lives in the engine.
@@ -62,8 +87,8 @@ These wrap the `branding-engine` CLI; see its README for all flags (`--only`,
 
 The monogram can be any initials (`A–Z`, `0–9` are bundled). To render the brand
 in a different typeface, set `"font"` in `brand/brand.json` (relative to `brand/`)
-and rebuild. The bundled Inter needs no python; a custom font is extracted on
-first use and needs `python3` + `fonttools`.
+and rebuild. The engine reads the glyph outlines directly (via `opentype.js`),
+so any `.ttf`/`.otf`/`.woff2` works with no extra tooling.
 
 ## Requirements
 

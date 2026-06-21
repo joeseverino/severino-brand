@@ -1,0 +1,18 @@
+# The entire CI surface of this repo. The plumbing — checkout, tool setup,
+# pinned action SHAs, running the gate, surfacing the report — lives once in
+# cordon's reusable gate, which runs cordon's checks engine over this repo. The
+# engine auto-detects the stack (Node/pnpm here) and folds in the matching
+# catalog checks (conformance over contract/brand.json, the repo's check:*
+# scripts — incl. check:contract for emitter drift) with cordon's invariants.
+# Required status check: `cordon / gate`.
+# See https://github.com/joeseverino/cordon/blob/main/docs/REUSABLE-GATE.md
+name: ci
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  cordon:
+    uses: joeseverino/cordon/.github/workflows/cordon-gate.yml@main

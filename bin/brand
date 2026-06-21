@@ -1,0 +1,43 @@
+#!/usr/bin/env node
+// brand — Cordon emitter for severino-brand, the fleet's first Node emitter.
+//
+// EMIT ONCE. The command surface is NOT declared here — it is DERIVED from this
+// repo's package.json `scripts` (the single source of what `npm run <x>` does).
+// The only fact declared by hand is each command's blast radius, which scripts
+// can't carry; `branding-engine` owns the flags (the `delegates` is derived from
+// the script string). Add a script + its effect and a command appears; change a
+// script and the contract re-derives. No hand-typed, drift-prone surface.
+//
+// NOT a launcher. `brand build`/`kit` RUN via `npm run build|kit` (or `brand …`
+// in the tools CLI); this only EMITS the contract. tools/bin/brand derives
+// build/kit from contract/brand.json rather than redeclaring them.
+//
+//   bin/brand --describe    print the cordon-v4 contract (what drift diffs)
+//   bin/brand --write       (re)write contract/brand.json after a scripts change
+//   bin/brand --check       exit 1 if the committed contract is stale
+//
+// The emitter brains live in cordon (referenced, never vendored); needs
+// $CORDON_HOME at authoring time — consumers just use the committed contract.
+
+import { readFile } from 'node:fs/promises';
+
+const CORDON = process.env.CORDON_HOME ?? `${process.env.HOME}/Documents/Code/Assets/cordon`;
+const { describeScripts, emitMain } = await import(`${CORDON}/emitters/node/index.mjs`);
+const pkg = JSON.parse(await readFile(new URL('../package.json', import.meta.url)));
+
+emitMain(
+  describeScripts(pkg, {
+    name: 'brand',
+    description: "Build Joe Severino's brand kits from brand/ via branding-engine.",
+    group: 'Integrations',
+    order: 150,
+    // The one fact package.json can't carry: each command's blast radius. Also
+    // the allowlist — `describe`/`describe:write` are emitter plumbing, not surface.
+    effects: { build: 'local_write', kit: 'local_write' },
+    paras: [
+      'Surface derived from package.json scripts; branding-engine owns the flags. ' +
+        'tools/bin/brand launches these commands and derives build/kit from this contract.',
+    ],
+  }),
+  { url: import.meta.url }, // roots the contract at ../contract/brand.json
+);
