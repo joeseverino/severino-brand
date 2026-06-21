@@ -6,7 +6,9 @@
   "description": "Joe Severino's brand: the data (mark, palette, type, voice) plus generated kits. Rendered by branding-engine.",
   "scripts": {
     "build": "branding-engine build --config brand --out kits",
-    "kit": "branding-engine kit"
+    "kit": "branding-engine kit",
+    "describe": "node bin/brand --describe",
+    "describe:write": "node bin/brand --write"
   },
   "dependencies": {
     "branding-engine": "^0.2.2"

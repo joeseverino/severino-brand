@@ -1,0 +1,35 @@
+{
+  "ok": true,
+  "schema_version": 4,
+  "name": "brand",
+  "description": "Build Joe Severino's brand kits from brand/ via branding-engine.",
+  "group": "Integrations",
+  "order": 150,
+  "effect": "read",
+  "global_options": [],
+  "positionals": [],
+  "paras": [
+    "Surface derived from package.json scripts; branding-engine owns the flags. tools/bin/brand launches these commands and derives build/kit from this contract."
+  ],
+  "examples": [],
+  "commands": [
+    {
+      "name": "build",
+      "summary": "",
+      "args": [],
+      "effect": "local_write",
+      "paras": [],
+      "examples": [],
+      "delegates": "branding-engine build --config brand --out kits"
+    },
+    {
+      "name": "kit",
+      "summary": "",
+      "args": [],
+      "effect": "local_write",
+      "paras": [],
+      "examples": [],
+      "delegates": "branding-engine kit"
+    }
+  ]
+}
