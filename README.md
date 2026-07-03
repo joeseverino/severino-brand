@@ -18,18 +18,18 @@ brand/      THE BRAND: the single source of truth
   sync.mjs       SHARED: read/splice/render primitives for projecting tokens.json
                  into a consumer's own file (the site's base.css, the vault's
                  Obsidian theme) — consumers own their targets, not a copy of the logic
-  fonts/  portrait.jpg
+  portrait.jpg
 kits/       GENERATED: delete it, run `npm run build`, get it back identical
   joe-severino/  the brand's own kit  (tracked)
   cards/         brand-wide social cards  (tracked)
   …              one-off / surface kits are private — git-ignored by default
-bin/brand          CORDON EMITTER (Node): derives build/kit from package.json
+bin/brand          CORDON EMITTER (Node): derives build/kit/figure from package.json
 contract/brand.json  GENERATED: the cordon-v4 command-surface contract
 ```
 
 ## Cordon contract
 
-This repo emits its `build`/`kit` command surface as a
+This repo emits its `build`/`kit`/`figure` command surface as a
 [Cordon](https://github.com/joeseverino/cordon) v4 contract — the fleet's first
 **Node** emitter. Emit once: `bin/brand` *derives* the surface from this repo's
 `package.json` scripts via cordon's reusable [`emitters/node`](https://github.com/joeseverino/cordon/tree/main/emitters/node)
@@ -38,8 +38,8 @@ This repo emits its `build`/`kit` command surface as a
 each command's `local_write` blast radius — nothing about the surface is typed
 twice. It follows cordon's tool convention — an executable `bin/<tool>` answering
 `--describe` — so the reusable `cordon / gate` covers it unchanged (`conformance`
-validates the contract; `drift` diffs it). `tools/bin/brand` is the launcher and
-*derives* build/kit from this contract rather than redeclaring them.
+validates the contract; `drift` diffs it). `tools/bin/brand` is the launcher; it
+runs these commands, mirroring this contract.
 
 ```sh
 bin/brand --describe      # print the contract
@@ -51,7 +51,7 @@ bin/brand --check         # fail if the committed contract is stale
 `npm run kit` (or `brand build` via the tools CLI).
 
 The generators live in their own public repo (`branding-engine`) and come in as
-an npm dependency (`^0.2.1`). Nothing Severino-specific lives in the engine.
+an npm dependency (`^0.2.2`). Nothing Severino-specific lives in the engine.
 
 ## The brand model
 

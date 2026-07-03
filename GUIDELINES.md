@@ -144,7 +144,7 @@ single-source clarity but stays dark.
 ## Typography
 
 **Inter**, a single variable woff2 (`weight 200–900`), is the entire type system,
-bundled at `brand/fonts/inter/inter-variable-latin.woff2`. Fallback:
+shipped as branding-engine's bundled default (no local copy). Fallback:
 `system-ui, sans-serif`. Monospace for code and terminal:
 `ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace`.
 
@@ -233,7 +233,6 @@ person, not a content engine.
 | `kits/cards/` | OG (1200×630) + GitHub social (1280×640) cards |
 | `brand/brand.json` · `surfaces.json` | the brand definition |
 | `brand/portrait.jpg` | portrait / Person image / card photo |
-| `brand/fonts/…` | the typeface |
 | `brand/tokens.json` | design-system token reference |
 | `LICENSE` | all rights reserved |
 

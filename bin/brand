@@ -8,9 +8,9 @@
 // the script string). Add a script + its effect and a command appears; change a
 // script and the contract re-derives. No hand-typed, drift-prone surface.
 //
-// NOT a launcher. `brand build`/`kit` RUN via `npm run build|kit` (or `brand …`
-// in the tools CLI); this only EMITS the contract. tools/bin/brand derives
-// build/kit from contract/brand.json rather than redeclaring them.
+// NOT a launcher. `brand build`/`kit`/`figure` RUN via `npm run build|kit|figure`
+// (or `brand …` in the tools CLI); this only EMITS the contract. tools/bin/brand
+// launches those commands, mirroring contract/brand.json.
 //
 //   bin/brand --describe    print the cordon-v4 contract (what drift diffs)
 //   bin/brand --write       (re)write contract/brand.json after a scripts change
@@ -33,10 +33,10 @@ emitMain(
     order: 150,
     // The one fact package.json can't carry: each command's blast radius. Also
     // the allowlist — `describe`/`describe:write` are emitter plumbing, not surface.
-    effects: { build: 'local_write', kit: 'local_write' },
+    effects: { build: 'local_write', kit: 'local_write', figure: 'local_write' },
     paras: [
       'Surface derived from package.json scripts; branding-engine owns the flags. ' +
-        'tools/bin/brand launches these commands and derives build/kit from this contract.',
+        'tools/bin/brand launches these commands, mirroring this contract.',
     ],
   }),
   { url: import.meta.url }, // roots the contract at ../contract/brand.json

@@ -9,7 +9,7 @@
   "global_options": [],
   "positionals": [],
   "paras": [
-    "Surface derived from package.json scripts; branding-engine owns the flags. tools/bin/brand launches these commands and derives build/kit from this contract."
+    "Surface derived from package.json scripts; branding-engine owns the flags. tools/bin/brand launches these commands, mirroring this contract."
   ],
   "examples": [],
   "commands": [
@@ -30,6 +30,15 @@
       "paras": [],
       "examples": [],
       "delegates": "branding-engine kit"
+    },
+    {
+      "name": "figure",
+      "summary": "",
+      "args": [],
+      "effect": "local_write",
+      "paras": [],
+      "examples": [],
+      "delegates": "branding-engine figure"
     }
   ]
 }
