@@ -9,8 +9,8 @@ importers:
   .:
     dependencies:
       branding-engine:
-        specifier: ^0.3.0
-        version: 0.3.0
+        specifier: ^0.4.0
+        version: 0.4.0
     devDependencies:
       '@playwright/test':
         specifier: ^1.61.0
@@ -188,8 +188,8 @@ packages:
   argparse@2.0.1:
     resolution: {integrity: sha512-8+9WqebbFzpX9OR+Wa6O29asIogeRMzcGtAINdpMHHyAg10f05aSFVBbcEqGf/PXw1EjAZ+q2/bEBg3DvurK3Q==}
 
-  branding-engine@0.3.0:
-    resolution: {integrity: sha512-MIMHfSFEHhvc2ShclKmqzWNYWI/P+334Wq+8+r6n6iOA/dXSdbSBsYUwc5jGATxjOyDSFc1+p1F+Wu3Gysdyqg==}
+  branding-engine@0.4.0:
+    resolution: {integrity: sha512-xVquWGXlvoWW/yEAOrgLAPGRya7IHyvh5D6aNNv/DjDul51sTRn07bxkbGgWGvMt0PNCXdKj0Obw6f0k9rs5jw==}
     engines: {node: '>=18'}
     hasBin: true
 
@@ -365,7 +365,7 @@ snapshots:
 
   argparse@2.0.1: {}
 
-  branding-engine@0.3.0:
+  branding-engine@0.4.0:
     dependencies:
       opentype.js: 2.0.0
       sharp: 0.34.5
