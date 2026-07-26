@@ -1,0 +1,47 @@
+{
+  "name": "Severino Presentation System",
+  "version": 1,
+  "slide": { "width": 1280, "height": 720, "aspectRatio": "16:9", "safeMargin": 48 },
+  "type": {
+    "family": "Inter",
+    "claim": { "size": 48, "weight": 700 },
+    "display": { "size": 64, "weight": 700 },
+    "body": { "size": 17, "weight": 400 },
+    "label": { "size": 12, "weight": 700 },
+    "footer": { "size": 11, "weight": 700 }
+  },
+  "color": {
+    "navy": "#1E3A8A",
+    "deep": "#14245C",
+    "blue": "#5B82D6",
+    "soft": "#EFF3FB",
+    "pale": "#DDE6FB",
+    "mutedBlue": "#A9C0E8",
+    "ink": "#0B0620",
+    "muted": "#6E6B7C",
+    "paper": "#FFFFFF"
+  },
+  "signature": {
+    "mark": "../kits/joe-severino/mark/mark-transparent-light.png",
+    "position": "upper-right",
+    "footerLeft": "JOE SEVERINO",
+    "pageFormat": "two-digit"
+  },
+  "grammar": {
+    "kicker": "24px navy/blue rule plus uppercase label",
+    "surfaces": "flat rectangles and open paper; no decorative rounded cards",
+    "charts": "direct labels, minimal axes, one proof per slide",
+    "titles": "argumentative claim rather than topic label"
+  },
+  "layoutFamilies": [
+    "cover-split",
+    "evidence-matrix",
+    "hierarchy-with-rail",
+    "thesis-and-list",
+    "domain-map",
+    "lifecycle-sequence",
+    "stakeholder-lanes",
+    "dark-control-grid",
+    "closing-statement"
+  ]
+}
