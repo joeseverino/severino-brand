@@ -1,7 +1,17 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
 
-import { mergeThemes, renderDesignSystemRoot } from '../brand/sync.mjs';
+import { mergeThemes, renderDesignSystemRoot, toJs } from '../brand/sync.mjs';
+
+test('toJs preserves primitive types and safely quotes strings', () => {
+  assert.equal(toJs({ schema: 1, enabled: true, note: "Joe's \\ brand" }), [
+    '{',
+    '  schema: 1,',
+    '  enabled: true,',
+    "  note: 'Joe\\'s \\\\ brand',",
+    '}',
+  ].join('\n'));
+});
 
 test('mergeThemes preserves light-only roles and derives dark overrides', () => {
   assert.deepEqual(
