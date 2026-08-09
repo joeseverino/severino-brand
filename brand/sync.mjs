@@ -36,7 +36,12 @@ export function spliceMarkers(source, label, inner, file = '<source>') {
 
 /** Serialize a value as a JS object literal: unquoted identifier keys, single quotes. */
 export function toJs(value, depth = 0) {
-  if (value === null || typeof value !== 'object') return `'${value}'`;
+  if (value === null || typeof value !== 'object') {
+    if (typeof value === 'string') {
+      return `'${value.replaceAll('\\', '\\\\').replaceAll("'", "\\'")}'`;
+    }
+    return JSON.stringify(value);
+  }
   const pad = '  '.repeat(depth + 1);
   const close = '  '.repeat(depth);
   const body = Object.entries(value)
