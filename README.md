@@ -8,6 +8,22 @@ The brand was shaped and proven on [jseverino.com](https://jseverino.com), so th
 site is its flagship example. This repo is where the brand is *defined*; the
 engine turns it into kits.
 
+## Versioned consumer contract
+
+The npm package is the executable boundary between this source repository and
+its consumers. `brand/tokens.json` remains the only editable token source;
+`brand/contract.mjs` validates and derives the semantic web contract once.
+
+```js
+import { tokenDigest, webContract } from 'severino-brand';
+```
+
+`webContract` provides identity, light/dark surfaces, social-card roles,
+theme-specific primary roles, and the complete design-system CSS projection.
+Consumers commit their generated build inputs for self-contained builds and
+run the same projection in check mode in CI. The exported SHA-256 digest makes
+every emitted artifact traceable to the exact token source.
+
 ## Layout
 
 ```
@@ -15,6 +31,7 @@ brand/      THE BRAND: the single source of truth
   brand.json     name, weight, primary identity, card copy
   surfaces.json  the other surfaces (inherit the brand, override what differs)
   tokens.json    design-system token reference
+  contract.mjs   VERSIONED: validated semantic contract derived from tokens.json
   sync.mjs       SHARED: read/splice/render primitives for projecting tokens.json
                  into a consumer's own file (the site's base.css, the vault's
                  Obsidian theme) — consumers own their targets, not a copy of the logic
