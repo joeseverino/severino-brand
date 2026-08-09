@@ -83,7 +83,7 @@ export function renderDesignSystemRoot(designSystem, { selector = ':root', dark 
 }
 
 /** Run a set of {file,label,inner} splices in place; log + return change count. */
-export function syncTargets(targets, { root = process.cwd(), log = console.log } = {}) {
+export function syncTargets(targets, { root = process.cwd(), log = console.log, check = false } = {}) {
   let changed = 0;
   for (const { file, label, inner } of targets) {
     const rel = path.relative(root, file);
@@ -93,9 +93,12 @@ export function syncTargets(targets, { root = process.cwd(), log = console.log }
       log(`= ${rel} (already in sync)`);
       continue;
     }
-    fs.writeFileSync(file, after);
-    log(`✓ ${rel} (rewrote token block)`);
+    if (!check) fs.writeFileSync(file, after);
+    log(`${check ? '!' : '✓'} ${rel} (${check ? 'token projection is stale' : 'rewrote token block'})`);
     changed += 1;
+  }
+  if (check && changed) {
+    throw new Error(`${changed} generated token projection${changed === 1 ? ' is' : 's are'} stale.`);
   }
   return changed;
 }
