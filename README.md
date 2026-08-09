@@ -10,8 +10,8 @@ engine turns it into kits.
 
 ## Versioned consumer contract
 
-The npm package is the executable boundary between this source repository and
-its consumers. `brand/tokens.json` remains the only editable token source;
+The signed Git package is the executable boundary between this source repository
+and its consumers. `brand/tokens.json` remains the only editable token source;
 `brand/contract.mjs` validates and derives the semantic web contract once.
 
 ```js
@@ -22,7 +22,9 @@ import { tokenDigest, webContract } from 'severino-brand';
 theme-specific primary roles, and the complete design-system CSS projection.
 Consumers commit their generated build inputs for self-contained builds and
 run the same projection in check mode in CI. The exported SHA-256 digest makes
-every emitted artifact traceable to the exact token source.
+every emitted artifact traceable to the exact token source. Consumers pin a
+signed release tag through their package lock, so no registry account or mutable
+neighboring checkout participates in the build.
 
 ## Layout
 

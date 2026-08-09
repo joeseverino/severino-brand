@@ -1,7 +1,7 @@
 {
   "name": "severino-brand",
   "version": "1.0.0",
-  "private": false,
+  "private": true,
   "type": "module",
   "description": "Joe Severino's brand: the data (mark, palette, type, voice) plus generated kits. Rendered by branding-engine.",
   "exports": {
@@ -17,9 +17,6 @@
   ],
   "engines": {
     "node": ">=20.9"
-  },
-  "publishConfig": {
-    "access": "public"
   },
   "repository": {
     "type": "git",
