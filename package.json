@@ -5,6 +5,8 @@
   "type": "module",
   "description": "Joe Severino's brand: the data (mark, palette, type, voice) plus generated kits. Rendered by branding-engine.",
   "scripts": {
+    "test": "node --test",
+    "check:test": "pnpm test",
     "build": "branding-engine build --config brand --out kits",
     "kit": "branding-engine kit",
     "figure": "branding-engine figure",
@@ -13,7 +15,7 @@
     "pictograms": "branding-engine pictogram --spec brand/pictograms.json --out kits/pictograms"
   },
   "dependencies": {
-    "branding-engine": "^0.4.0"
+    "branding-engine": "^0.7.0"
   },
   "packageManager": "pnpm@10.34.4+sha512.8768be55200ae3f2226b6527fcca2687e14bc4e5f12d7721a0f25da3df47915177058648db4177baf348120fa0ba2752d8d8d93f6beaf1fe64ae18da8de961af",
   "devDependencies": {

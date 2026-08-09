@@ -103,23 +103,52 @@ Social-card palette (used by the OG and social cards):
 
 ### Interface (semantic)
 
-These are the themeable UI tokens. A future dark mode flips these and only these.
+These are the themeable UI tokens. Dark mode flips these and only these.
 
-| Token | Value | Role |
+| Token | Light | Dark | Role |
+|---|---|---|---|
+| `--color-bg` | `#ffffff` | `#131826` | page background |
+| `--color-surface` | `#ffffff` | `#1a2032` | raised surfaces: cards, form fields, pills |
+| `--color-text` | `#0b0620` | `#e8eaf2` | body text |
+| `--color-text-alt` | `#4C63A0` | `#9db2e6` | secondary / muted-navy text |
+| `--color-soft` | `#eff3fb` | `#1e2537` | soft navy-tinted fill |
+| `--color-muted` | `#6E6B7C` | `#a2a8bd` | de-emphasized text |
+| `--color-border` | `color-mix(in oklch, text 8%)` | derived | hairlines, derived from text |
+| `--color-success` / `--color-error` | `#166534` / `#991b1b` | `#4ade80` / `#fca5a5` | form + status |
+
+`--color-surface` equals `--color-bg` in light and steps *above* it in dark: on a
+white page a card is defined by its border and shadow, but on a dark page shadows
+barely register, so elevation has to be carried by lightness instead.
+
+Dark values live in `designSystemDark` in `brand/tokens.json` and are folded into
+one `:root` block as `light-dark(light, dark)` pairs by `renderDesignSystemRoot`.
+Only tokens that actually change need an entry: `--color-border` has none because
+it is a mix over `--color-text` and inherits the flip.
+
+`light-dark()` accepts colors only, so a token that is geometry *plus* a color
+(`--shadow-sm`) keeps its color in a separate `--shadow-color-*` token and
+composes it. Split any future token the same way rather than duplicating the rule.
+
+### Interface (dark accent)
+
+Navy is unreadable on a dark page, so `--color-primary` is dual-valued from
+`brand.onDark`:
+
+| Token | Hex | Role |
 |---|---|---|
-| `--color-bg` | `#ffffff` | page background |
-| `--color-text` | `#0b0620` | body text |
-| `--color-text-alt` | `#4C63A0` | secondary / muted-navy text |
-| `--color-soft` | `#eff3fb` | soft navy-tinted fill |
-| `--color-muted` | `#6E6B7C` | de-emphasized text |
-| `--color-border` | `color-mix(in oklch, text 8%)` | hairlines, derived from text |
-| `--color-success` / `--color-error` | `#166534` / `#991b1b` | form + status |
+| `onDark.primary` | `#7C9CE0` | `--color-primary` on a dark page |
+| `onDark.primaryDeep` | `#A8C0F0` | `--color-primary-deep` on a dark page |
+
+`primaryDeep` is *lighter* than `primary` here, inverting the light-mode
+relationship. "Deep" means more emphasis, and emphasis moves toward the far end of
+the page's contrast range, which is up on a dark page and down on a light one.
+Hover and active states then read identically in both themes.
 
 ### Terminal signature (tokenized, stays dark)
 
 The code-block and terminal palette is a tokenized group (`--code-*`, `--term-*`)
 that stays dark regardless of theme: it represents a real terminal, not a
-themeable surface. The site is light-only, so these never recolor — but they are
+themeable surface. These never recolor, in either theme — but they are
 still named so the whole palette reads in one place and changes in one edit.
 
 | Token | Hex | Where |
@@ -138,6 +167,10 @@ palette lives in one place, so any change is one edit and the system has no
 exceptions to remember. Tokens that represent a *themeable role* (navy-derived
 fills, hairlines) recolor with the accent; the terminal group is named for
 single-source clarity but stays dark.
+
+The rule is what makes dark mode a token-layer edit. Because no component
+stylesheet holds a literal, adding a theme touched `tokens.json` and the renderer,
+not the 2,000 lines of CSS that consume them.
 
 ---
 

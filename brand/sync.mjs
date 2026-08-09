@@ -56,9 +56,30 @@ export function renderCssVars(vars, selector = ':root') {
   return `${selector} {\n${body}\n}`;
 }
 
-/** designSystem object → a `:root { … }` CSS block (site's :root token block). */
-export function renderDesignSystemRoot(designSystem, selector = ':root') {
-  return renderCssVars(designSystem, selector);
+/**
+ * Fold a dark override map into the light one as `light-dark(light, dark)` values.
+ * Keys absent from `dark` pass through untouched, so the dark map lists only the
+ * themeable subset. A key present ONLY in `dark` is a typo that would otherwise
+ * vanish from the output, so it throws.
+ */
+export function mergeThemes(light, dark = {}) {
+  const orphan = Object.keys(dark).find((key) => !(key in light));
+  if (orphan) throw new Error(`dark token "${orphan}" has no light counterpart`);
+  return Object.fromEntries(
+    Object.entries(light).map(([key, value]) =>
+      key in dark ? [key, `light-dark(${value}, ${dark[key]})`] : [key, value],
+    ),
+  );
+}
+
+/**
+ * designSystem object → a `:root { … }` CSS block (site's :root token block).
+ * Pass `dark` to emit dual-value tokens; `color-scheme: light dark` leads the
+ * block because it is what makes `light-dark()` resolve at all.
+ */
+export function renderDesignSystemRoot(designSystem, { selector = ':root', dark } = {}) {
+  if (!dark) return renderCssVars(designSystem, selector);
+  return renderCssVars({ 'color-scheme': 'light dark', ...mergeThemes(designSystem, dark) }, selector);
 }
 
 /** Run a set of {file,label,inner} splices in place; log + return change count. */
