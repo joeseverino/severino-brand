@@ -12,8 +12,8 @@ importers:
         specifier: ^1.61.0
         version: 1.61.0
       branding-engine:
-        specifier: ^0.8.0
-        version: 0.8.0(@playwright/test@1.61.0)
+        specifier: ^0.8.1
+        version: 0.8.1(@playwright/test@1.61.0)
       cordon-spec:
         specifier: 1.3.0
         version: 1.3.0
@@ -196,8 +196,8 @@ packages:
   argparse@2.0.1:
     resolution: {integrity: sha512-8+9WqebbFzpX9OR+Wa6O29asIogeRMzcGtAINdpMHHyAg10f05aSFVBbcEqGf/PXw1EjAZ+q2/bEBg3DvurK3Q==}
 
-  branding-engine@0.8.0:
-    resolution: {integrity: sha512-bYpqEIBBjM6GLizf/UgWJ/jRXAEAu4cY6U2x4qlD9lkVQxDuisvkcdeYLMIok9kABzs5L4fjcfXuXDocDdCu9A==}
+  branding-engine@0.8.1:
+    resolution: {integrity: sha512-zgDrVoqMIGSuIt8WWYxSlYiHQjk386LlC2QV1Cz1vPwQOrPYQDMIYWZrESKtgSzkYHElQMvrvUPlFvsMljcQLg==}
     engines: {node: '>=20.9'}
     hasBin: true
     peerDependencies:
@@ -396,7 +396,7 @@ snapshots:
 
   argparse@2.0.1: {}
 
-  branding-engine@0.8.0(@playwright/test@1.61.0):
+  branding-engine@0.8.1(@playwright/test@1.61.0):
     dependencies:
       elkjs: 0.12.0
       opentype.js: 2.0.0
