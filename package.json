@@ -40,6 +40,6 @@
   "devDependencies": {
     "@playwright/test": "1.63.0",
     "branding-engine": "0.8.1",
-    "cordon-spec": "1.4.0"
+    "cordon-spec": "2.0.0"
   }
 }
