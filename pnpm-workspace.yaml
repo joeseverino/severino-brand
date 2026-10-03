@@ -1,5 +1,0 @@
-onlyBuiltDependencies:
-  - sharp
-  - "@playwright/test"
-  - playwright-core
-  - playwright
