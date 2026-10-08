@@ -37,5 +37,17 @@
     "glyph": "switch",
     "hex": "#7C9CE0",
     "circlePreview": true
+  },
+  {
+    "name": "ssh",
+    "glyph": "key",
+    "hex": "#1E3A8A",
+    "circlePreview": true
+  },
+  {
+    "name": "recovery",
+    "glyph": "shield",
+    "hex": "#1E3A8A",
+    "circlePreview": true
   }
 ]
