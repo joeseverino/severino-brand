@@ -12,7 +12,7 @@ engine turns it into kits.
 
 The signed Git package is the executable boundary between this source repository
 and its consumers. `brand/tokens.json` remains the only editable token source;
-`brand/contract.mjs` validates and derives the semantic web contract once.
+`brand/contract.ts` validates and derives the semantic web contract once.
 
 ```js
 import { tokenDigest, webContract } from 'severino-brand';
@@ -26,6 +26,12 @@ every emitted artifact traceable to the exact token source. Consumers pin a
 signed release tag through their package lock, so no registry account or mutable
 neighboring checkout participates in the build.
 
+The TypeScript sources run directly in this repo. The published package is the
+compiled `dist/` (`npm run build:package`, also run by `npm pack`), so consumers
+get plain JavaScript and `.d.ts` files. A signed `vX.Y.Z` tag triggers
+`.github/workflows/release.yml`, which checks the repo, packs it, and attaches
+the tarball to the release.
+
 ## Layout
 
 ```
@@ -33,8 +39,8 @@ brand/      THE BRAND: the single source of truth
   brand.json     name, weight, primary identity, card copy
   surfaces.json  the other surfaces (inherit the brand, override what differs)
   tokens.json    design-system token reference
-  contract.mjs   VERSIONED: validated semantic contract derived from tokens.json
-  sync.mjs       SHARED: read/splice/render primitives for projecting tokens.json
+  contract.ts    VERSIONED: validated semantic contract derived from tokens.json
+  sync.ts        SHARED: read/splice/render primitives for projecting tokens.json
                  into a consumer's own file (the site's base.css, the vault's
                  Obsidian theme) — consumers own their targets, not a copy of the logic
   portrait.jpg

@@ -1,5 +1,53 @@
 [
-  { "name": "home", "glyph": "home", "hex": "#1E3A8A" },
-  { "name": "server", "glyph": "server", "hex": "#1E3A8A" },
-  { "name": "laptop", "glyph": "laptop", "hex": "#1E3A8A" }
+  {
+    "name": "home",
+    "glyph": "home",
+    "hex": "#1E3A8A"
+  },
+  {
+    "name": "server",
+    "glyph": "server",
+    "hex": "#1E3A8A"
+  },
+  {
+    "name": "laptop",
+    "glyph": "laptop",
+    "hex": "#1E3A8A"
+  },
+  {
+    "name": "cloud",
+    "glyph": "cloud",
+    "hex": "#1E3A8A"
+  },
+  {
+    "name": "agents",
+    "glyph": "switch",
+    "hex": "#1E3A8A",
+    "circlePreview": true
+  },
+  {
+    "name": "hq-development",
+    "logo": "kits/hq/mark/mark-transparent-light-tight.png",
+    "hex": "paper",
+    "circlePreview": true,
+    "fit": 0.62890625
+  },
+  {
+    "name": "agents-service",
+    "glyph": "switch",
+    "hex": "#7C9CE0",
+    "circlePreview": true
+  },
+  {
+    "name": "ssh",
+    "glyph": "key",
+    "hex": "#1E3A8A",
+    "circlePreview": true
+  },
+  {
+    "name": "recovery",
+    "glyph": "shield",
+    "hex": "#1E3A8A",
+    "circlePreview": true
+  }
 ]

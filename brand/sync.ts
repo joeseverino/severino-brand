@@ -7,12 +7,30 @@
 // add a primitive here instead.
 import fs from 'node:fs';
 import path from 'node:path';
-import { fileURLToPath } from 'node:url';
 
-const brandRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
+import type { Tokens } from './contract.ts';
+
+export type TokenMap = Record<string, string>;
+
+export interface SyncTarget {
+  file: string;
+  label: string;
+  inner: string;
+}
+
+export interface SyncOptions {
+  root?: string;
+  log?: (line: string) => void;
+  check?: boolean;
+}
+
+const brandRoot = path.resolve(import.meta.dirname, '..');
 
 /** Locate + parse brand/tokens.json. Defaults to this repo; BRAND_DIR overrides. */
-export function loadTokens(brandDir = process.env.BRAND_DIR ?? brandRoot) {
+export function loadTokens(brandDir: string = process.env.BRAND_DIR ?? brandRoot): {
+  tokens: Tokens;
+  tokensPath: string;
+} {
   const tokensPath = path.join(path.resolve(brandDir), 'brand/tokens.json');
   if (!fs.existsSync(tokensPath)) {
     throw new Error(
@@ -23,7 +41,12 @@ export function loadTokens(brandDir = process.env.BRAND_DIR ?? brandRoot) {
 }
 
 /** Replace the text between `${label}:start` and `${label}:end` markers, in place. */
-export function spliceMarkers(source, label, inner, file = '<source>') {
+export function spliceMarkers(
+  source: string,
+  label: string,
+  inner: string,
+  file = '<source>',
+): string {
   const start = source.indexOf(`${label}:start`);
   const end = source.indexOf(`${label}:end`);
   if (start === -1 || end === -1 || end < start) {
@@ -35,7 +58,7 @@ export function spliceMarkers(source, label, inner, file = '<source>') {
 }
 
 /** Serialize a value as a JS object literal: unquoted identifier keys, single quotes. */
-export function toJs(value, depth = 0) {
+export function toJs(value: unknown, depth = 0): string {
   if (value === null || typeof value !== 'object') {
     if (typeof value === 'string') {
       return `'${value.replaceAll('\\', '\\\\').replaceAll("'", "\\'")}'`;
@@ -54,7 +77,7 @@ export function toJs(value, depth = 0) {
 }
 
 /** A flat `{ '--var': value }` map → a `selector { … }` CSS block. */
-export function renderCssVars(vars, selector = ':root') {
+export function renderCssVars(vars: TokenMap, selector = ':root'): string {
   const body = Object.entries(vars)
     .map(([prop, val]) => `  ${prop}: ${val};`)
     .join('\n');
@@ -67,7 +90,7 @@ export function renderCssVars(vars, selector = ':root') {
  * themeable subset. A key present ONLY in `dark` is a typo that would otherwise
  * vanish from the output, so it throws.
  */
-export function mergeThemes(light, dark = {}) {
+export function mergeThemes(light: TokenMap, dark: TokenMap = {}): TokenMap {
   const orphan = Object.keys(dark).find((key) => !(key in light));
   if (orphan) throw new Error(`dark token "${orphan}" has no light counterpart`);
   return Object.fromEntries(
@@ -82,13 +105,19 @@ export function mergeThemes(light, dark = {}) {
  * Pass `dark` to emit dual-value tokens; `color-scheme: light dark` leads the
  * block because it is what makes `light-dark()` resolve at all.
  */
-export function renderDesignSystemRoot(designSystem, { selector = ':root', dark } = {}) {
+export function renderDesignSystemRoot(
+  designSystem: TokenMap,
+  { selector = ':root', dark }: { selector?: string; dark?: TokenMap } = {},
+): string {
   if (!dark) return renderCssVars(designSystem, selector);
   return renderCssVars({ 'color-scheme': 'light dark', ...mergeThemes(designSystem, dark) }, selector);
 }
 
 /** Run a set of {file,label,inner} splices in place; log + return change count. */
-export function syncTargets(targets, { root = process.cwd(), log = console.log, check = false } = {}) {
+export function syncTargets(
+  targets: readonly SyncTarget[],
+  { root = process.cwd(), log = console.log, check = false }: SyncOptions = {},
+): number {
   let changed = 0;
   for (const { file, label, inner } of targets) {
     const rel = path.relative(root, file);

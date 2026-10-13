@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
 
-import { BRAND_CONTRACT_SCHEMA, tokenDigest, tokens, webContract } from '../index.mjs';
+import { BRAND_CONTRACT_SCHEMA, tokenDigest, tokens, webContract } from '../index.ts';
 
 test('web contract derives every downstream semantic role from canonical tokens', () => {
   assert.equal(BRAND_CONTRACT_SCHEMA, 1);
@@ -16,9 +16,9 @@ test('web contract derives every downstream semantic role from canonical tokens'
     panel: tokens.brand.navy,
     panelDeep: tokens.brand.navyDeep,
     onPanel: tokens.brand.onNavy,
-    accent: tokens.brand.card.accent,
-    textSoft: tokens.brand.card.textSoft,
-    textMuted: tokens.brand.card.textMuted,
+    accent: tokens.brand.card?.accent,
+    textSoft: tokens.brand.card?.textSoft,
+    textMuted: tokens.brand.card?.textMuted,
   });
   assert.match(webContract.designSystemCss, /color-scheme: light dark/);
 });

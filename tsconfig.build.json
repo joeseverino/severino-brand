@@ -1,0 +1,10 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "noEmit": false,
+    "rootDir": ".",
+    "outDir": "dist",
+    "declaration": true
+  },
+  "include": ["index.ts", "brand/*.ts"]
+}

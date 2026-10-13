@@ -30,7 +30,7 @@ A `JS` monogram built from real Inter (weight 800) glyph outlines, so it matches
 the brand typeface instead of approximating it. It is composed programmatically,
 not drawn: the `branding-engine` lays out bundled glyph outlines into the mark.
 
-**Construction** (the numbers that define it, in `mark.mjs`):
+**Construction** (the numbers that define it, in `mark.ts`):
 
 | Param | Value | Meaning |
 |---|---|---|
@@ -126,7 +126,7 @@ Only tokens that actually change need an entry: `--color-border` has none becaus
 it is a mix over `--color-text` and inherits the flip.
 
 `light-dark()` accepts colors only, so a token that is geometry *plus* a color
-(`--shadow-sm`) keeps its color in a separate `--shadow-color-*` token and
+(`--shadow-md`) keeps its color in a separate `--shadow-color-*` token and
 composes it. Split any future token the same way rather than duplicating the rule.
 
 ### Interface (dark accent)

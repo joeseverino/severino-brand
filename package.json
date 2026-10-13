@@ -1,19 +1,22 @@
 {
   "name": "severino-brand",
-  "version": "1.0.2",
+  "version": "2.0.0",
   "private": true,
   "type": "module",
   "description": "Joe Severino's brand: the data (mark, palette, type, voice) plus generated kits. Rendered by branding-engine.",
   "exports": {
-    ".": "./index.mjs",
-    "./tokens.json": "./brand/tokens.json",
-    "./sync": "./brand/sync.mjs"
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    },
+    "./tokens.json": "./dist/brand/tokens.json",
+    "./sync": {
+      "types": "./dist/brand/sync.d.ts",
+      "default": "./dist/brand/sync.js"
+    }
   },
   "files": [
-    "brand/contract.mjs",
-    "brand/sync.mjs",
-    "brand/tokens.json",
-    "index.mjs"
+    "dist"
   ],
   "engines": {
     "node": ">=24.21.0"
@@ -25,21 +28,26 @@
   "homepage": "https://github.com/joeseverino/severino-brand#readme",
   "license": "SEE LICENSE IN LICENSE",
   "scripts": {
-    "test": "node --test",
-    "check": "npm test && npm run check:package",
+    "test": "node --test test/*.test.ts",
+    "check": "npm run check:types && npm test && npm run check:package",
     "check:package": "npm pack --dry-run",
     "check:test": "npm test",
     "build": "branding-engine build --config brand --out kits",
     "kit": "branding-engine kit",
     "figure": "branding-engine figure",
-    "describe": "node bin/brand --describe",
-    "describe:write": "node bin/brand --write",
-    "pictograms": "branding-engine pictogram --spec brand/pictograms.json --out kits/pictograms"
+    "describe": "node bin/brand.ts --describe",
+    "describe:write": "node bin/brand.ts --write",
+    "pictograms": "branding-engine pictogram --spec brand/pictograms.json --out kits/pictograms",
+    "check:types": "tsc --noEmit",
+    "build:package": "node scripts/build-package.ts",
+    "prepack": "npm run build:package"
   },
   "packageManager": "npm@11.19.0",
   "devDependencies": {
     "@playwright/test": "1.63.0",
-    "branding-engine": "0.8.1",
-    "cordon-spec": "2.0.0"
+    "@types/node": "24.19.1",
+    "branding-engine": "0.9.0",
+    "cordon-spec": "2.0.0",
+    "typescript": "7.0.2"
   }
 }
