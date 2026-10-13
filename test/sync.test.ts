@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
 
-import { mergeThemes, renderDesignSystemRoot, toJs } from '../brand/sync.mjs';
+import { mergeThemes, renderDesignSystemRoot, toJs } from '../brand/sync.ts';
 
 test('toJs preserves primitive types and safely quotes strings', () => {
   assert.equal(toJs({ schema: 1, enabled: true, note: "Joe's \\ brand" }), [

@@ -30,7 +30,7 @@ A `JS` monogram built from real Inter (weight 800) glyph outlines, so it matches
 the brand typeface instead of approximating it. It is composed programmatically,
 not drawn: the `branding-engine` lays out bundled glyph outlines into the mark.
 
-**Construction** (the numbers that define it, in `mark.mjs`):
+**Construction** (the numbers that define it, in `mark.ts`):
 
 | Param | Value | Meaning |
 |---|---|---|

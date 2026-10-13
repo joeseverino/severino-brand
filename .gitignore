@@ -8,3 +8,4 @@ node_modules/
 /kits/*
 !/kits/joe-severino/
 !/kits/cards/
+dist/
